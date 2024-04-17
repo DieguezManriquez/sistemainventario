@@ -17,24 +17,35 @@ import { unidades } from "../constantes";
     <input type="date" id="fecha" />
     <button id="button">Registrar Producto</button>
     <a href="/ListarProductos"> Listar</a>
+    <button id="botonListar">Listar </button>
 </Layout>
 <script>
-    import { agregarProducto } from "../constantes";
+    import { agregarProducto, productos } from "../constantes";
     const boton = document.getElementById("button");
-    
+
     boton.addEventListener("click", () => {
-        const nombre = document.getElementById("producto").value
-        const cantidad = document.getElementById("cantidad").value as HTMLInputElement;
-        const unidad = document.getElementById("unidades").value as HTMLInputElement;
-        const fecha = document.getElementById("fecha").value as HTMLInputElement;
+        const id = (document.getElementById("producto") as HTMLInputElement)
+            .value;
+        const cantidad = (
+            document.getElementById("cantidad") as HTMLInputElement
+        ).value;
+        const unidad = (document.getElementById("unidades") as HTMLInputElement)
+            .value;
+        const fecha = (document.getElementById("fecha") as HTMLInputElement)
+            .value;
+        parseInt(cantidad);
         const producto = {
-            nombre: nombre,
+            id: id,
+            nombre: id,
             cantidad: cantidad,
             unidad: unidad,
-            fecha: fecha,
+            fechaIngreso: fecha,
         };
-        console.log(producto)
         agregarProducto(producto);
+        console.log(producto);
     });
-    
+    const boton2 = document.getElementById("botonListar");
+    boton2.addEventListener("click", () => {
+        console.log(productos);
+    });
 </script>
