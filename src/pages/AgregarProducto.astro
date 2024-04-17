@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { unidades } from "../constantes";
+---
+
+<Layout title="Welcome to Astro.">
+    <h1>Registarar producto</h1>
+    <label for=""> Producto</label>
+    <input type="text" id="producto" />
+    <label for=""> Cantidad</label>
+    <input type="number" id="cantidad" />
+    <label for=""></label>
+    <select name="" id="unidades">
+        {unidades.map((unidad) => <option value={unidad}>{unidad}</option>)}
+    </select>
+    <label for="">Fecha ingreso producto</label>
+    <input type="date" id="fecha" />
+    <button id="button">Registrar Producto</button>
+    <a href="/ListarProductos"> Listar</a>
+</Layout>
+<script>
+    import { agregarProducto } from "../constantes";
+    const boton = document.getElementById("button");
+    
+    boton.addEventListener("click", () => {
+        const nombre = document.getElementById("producto").value
+        const cantidad = document.getElementById("cantidad").value as HTMLInputElement;
+        const unidad = document.getElementById("unidades").value as HTMLInputElement;
+        const fecha = document.getElementById("fecha").value as HTMLInputElement;
+        const producto = {
+            nombre: nombre,
+            cantidad: cantidad,
+            unidad: unidad,
+            fecha: fecha,
+        };
+        console.log(producto)
+        agregarProducto(producto);
+    });
+    
+</script>

@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1>Bienvenido!</h1>
+		<form>
+			<label for="">Correo: </label>
+			<input type="email" id="email" />
+			<label for="">Contraseña: </label>
+			<input type="password" id="password" />
+			<button id="enviar"> Login</button>
+		</form>
+	</main>
+</Layout>
+<script>
+	const user = "a@notiene.cl"
+	const email = document.getElementById("email") as HTMLInputElement;
+	const password = document.getElementById("password") as HTMLInputElement;
+	const Button = document.getElementById("enviar");
+
+	Button.addEventListener("click", (event) => {
+		if(user === email.value){
+			alert(email.value + "  " + password.value);
+			alert("Correcto")
+			event.preventDefault();
+			location.href = "./ListarProductos";
+		}else{
+			alert("Error")
+		}
+	});
+</script>

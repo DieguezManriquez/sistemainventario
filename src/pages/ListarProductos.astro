@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {productos} from "../constantes"
+console.log(productos)
+---
+
+<Layout title="Welcome to Astro.">
+    <main>
+        <h1>Listado de productos</h1>
+        <label for=""> Seleccione local</label>
+        <select name="Local" id="Local">
+            <option value="0">Casa</option>
+            <option value="1">Local</option>
+        </select>
+        <input type="date" />
+        <button> Enviar</button>
+        <ul> 
+            {
+                productos.map(producto => (<li>{producto.nombre}</li>))
+                
+            }
+        </ul>
+        <button>imprimir</button>
+        <a href="/AgregarProducto">asd
+        </a>
+    </main>
+</Layout>
