@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { unidades } from "../constantes";
+import { db, UNIDADES, PRODUCTOS } from "astro:db";
+const unidades = await db.select().from(UNIDADES);
+console.log(unidades);
 ---
 
 <Layout title="Welcome to Astro.">
@@ -11,19 +13,37 @@ import { unidades } from "../constantes";
     <input type="number" id="cantidad" />
     <label for=""></label>
     <select name="" id="unidades">
-        {unidades.map((unidad) => <option value={unidad}>{unidad}</option>)}
+        {
+            unidades.map((unidad) => (
+                <option value={unidad.id}>{unidad.unidades}</option>
+            ))
+        }
     </select>
     <label for="">Fecha ingreso producto</label>
     <input type="date" id="fecha" />
-    <button id="button">Registrar Producto</button>
+    <button id="RegistrarProducto">Registrar Producto</button>
     <a href="/ListarProductos"> Listar</a>
     <button id="botonListar">Listar </button>
 </Layout>
-<script>
-    import { agregarProducto, productos } from "../constantes";
-    const boton = document.getElementById("button");
+<script is:inline>
+    const boton = document.getElementById("RegistrarProducto");
+    boton.addEventListener("click", async () => {
+        const response = await fetch("/api/producto", {
+            method: "POST",
+            body: JSON.stringify(producto),
+            headers: { "Content-Type": "aplication/json" },
+        })
+        alert(response)
+    });
+    // import { db, UNIDADES, PRODUCTOS } from "astro:db";
+    // import { POST } from "./api/producto";
 
-    boton.addEventListener("click", () => {
+    // async function agregarproductos(producto) {
+    //     await db.insert(PRODUCTOS).values(producto);
+    // }
+    /*
+    boton.addEventListener("click", async () => {
+        alert("errrr");
         const id = (document.getElementById("producto") as HTMLInputElement)
             .value;
         const cantidad = (
@@ -41,11 +61,11 @@ import { unidades } from "../constantes";
             unidad: unidad,
             fechaIngreso: fecha,
         };
-        agregarProducto(producto);
+        // await agregarproductos(producto);
         console.log(producto);
     });
+    */
+
     const boton2 = document.getElementById("botonListar");
-    boton2.addEventListener("click", () => {
-        console.log(productos);
-    });
+    boton2.addEventListener("click", () => {});
 </script>

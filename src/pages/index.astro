@@ -1,12 +1,47 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import type {User} from "@auth/core/types";
+import {getSession} from "auth-astro/server";
+import ListarProductos from "./ListarProductos.astro";
+const session = await getSession(Astro.request);
+const usuario = session?.user;
 ---
 
 <Layout title="Sistema Inventario">
 	<main>
 		<h1>Sistema Inventario</h1>
-		<button id="botonLogin">Login</button>
-		<button id="botonLogout">Log out</button>
+	
+		{
+			usuario ? (
+			<h1>{usuario.name}</h1>
+			<button id="LogOut">LogOut </button>
+			<ListarProductos> </ListarProductos>
+			):(<h1>usuario no encontrado!!</h1>
+				<button id="Login">LogIn</button>
+			)
+		}
 	</main>
 </Layout>
+<script>
+	const {signIn} = await import ("auth-astro/client") 
+	
+	const ButtonGoogle = document.getElementById("Login");
+	ButtonGoogle.addEventListener("click", async () => {
+	
+	await signIn("google")
+	
+	})
+
+	</script>
+	<script>
+		const {signOut} = await import ("auth-astro/client") 
+const ButtonLogOut = document.getElementById("LogOut");
+
+	ButtonLogOut.addEventListener("click", async () =>{
+
+		
+		await signOut();
+	})
+	
+	</script>

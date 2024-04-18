@@ -1,13 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { productos } from "../constantes";
 import Index from "./index.astro";
-console.log(productos);
+import {db,PRODUCTOS} from "astro:db"
+const productos = await db.select().from(PRODUCTOS)
+
 ---
 
 <Layout title="Welcome to Astro.">
     <main>
-         session.setAttribute("arraylist", productos);
         <h1>Listado de productos</h1>
         <label for=""> Seleccione local</label>
         <select name="Local" id="Local">
@@ -19,7 +19,7 @@ console.log(productos);
             {
                 //productos.join()
                 //document.getElementById("").innerHTML = productos.join("")
-                productos.map((producto) => <li>{producto.nombre}</li>)
+                productos.map((Producto) => <li>{Producto.nombre}</li>)
             }
         </ul>
         <button>imprimir</button>
@@ -27,7 +27,6 @@ console.log(productos);
         <button id="botonListar">Listar</button>
         <script>
             
-             session.setAttribute("arraylist", productos);
              import { productos } from "../constantes";
 
              const boton = document.getElementById("botonListar");
