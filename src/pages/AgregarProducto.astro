@@ -35,7 +35,7 @@ console.log(unidades);
 <script>
     const boton = document.getElementById("RegistrarProducto");
     const formulario = document.getElementById("FormularioRegistro") as HTMLFormElement
-    boton.addEventListener("click", async (e) => {
+    boton?.addEventListener("click", async (e) => {
         e.preventDefault()
   const formData = new FormData(formulario)
   const producto = {}

@@ -27,7 +27,7 @@ const usuario = session?.user;
 	const {signIn} = await import ("auth-astro/client") 
 	
 	const ButtonGoogle = document.getElementById("Login");
-	ButtonGoogle.addEventListener("click", async () => {
+	ButtonGoogle?.addEventListener("click", async () => {
 	
 	await signIn("google")
 	
@@ -38,7 +38,7 @@ const usuario = session?.user;
 		const {signOut} = await import ("auth-astro/client") 
 const ButtonLogOut = document.getElementById("LogOut");
 
-	ButtonLogOut.addEventListener("click", async () =>{
+	ButtonLogOut?.addEventListener("click", async () =>{
 
 		
 		await signOut();

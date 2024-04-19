@@ -30,7 +30,7 @@ const productos = await db.select().from(PRODUCTOS)
              import { productos } from "../constantes";
 
              const boton = document.getElementById("botonListar");
-             boton.addEventListener("click", () => {
+             boton?.addEventListener("click", () => {
                 console.log(productos);
             });
            
