@@ -6,34 +6,50 @@ console.log(unidades);
 ---
 
 <Layout title="Welcome to Astro.">
-    <h1>Registarar producto</h1>
-    <label for=""> Producto</label>
-    <input type="text" id="producto" />
-    <label for=""> Cantidad</label>
-    <input type="number" id="cantidad" />
-    <label for=""></label>
-    <select name="" id="unidades">
-        {
-            unidades.map((unidad) => (
-                <option value={unidad.id}>{unidad.unidades}</option>
-            ))
-        }
-    </select>
-    <label for="">Fecha ingreso producto</label>
-    <input type="date" id="fecha" />
+    <form id="FormularioRegistro">
+        <h1>Registarar producto</h1>
+        <label for="">Codigo del producto</label>
+        <input type="text" id="codigo" name="codigo" >
+        <label for=""> Producto</label>
+        <input type="text" id="producto" name="producto" />
+        <label for=""> Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad"/>
+        <label for=""></label>
+        <select name="unidad" id="unidades">
+            {
+                unidades.map((unidad) => (
+                    <option value={unidad.id}>{unidad.unidades}</option>
+                ))
+            }
+        </select>
+        <label for="">Fecha ingreso producto</label>
+        <input type="date" id="fecha" name="fecha"/>
+    </form>
+
     <button id="RegistrarProducto">Registrar Producto</button>
     <a href="/ListarProductos"> Listar</a>
     <button id="botonListar">Listar </button>
+
 </Layout>
-<script is:inline>
+
+<script>
     const boton = document.getElementById("RegistrarProducto");
-    boton.addEventListener("click", async () => {
+    const formulario = document.getElementById("FormularioRegistro") as HTMLFormElement
+    boton.addEventListener("click", async (e) => {
+        e.preventDefault()
+  const formData = new FormData(formulario)
+  const producto = {}
+
+  for (const [key, value] of formData) {
+    producto[key] = value
+  }
+  console.log(producto)
         const response = await fetch("/api/producto", {
             method: "POST",
             body: JSON.stringify(producto),
             headers: { "Content-Type": "aplication/json" },
-        })
-        alert(response)
+        });
+        alert(response.json());
     });
     // import { db, UNIDADES, PRODUCTOS } from "astro:db";
     // import { POST } from "./api/producto";

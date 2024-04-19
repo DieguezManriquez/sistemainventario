@@ -1,4 +1,4 @@
-import { UNIDADES, db } from 'astro:db';
+import { PRODUCTOS, UNIDADES, db } from 'astro:db';
 
 // https://astro.build/db/seed
 export default async function seed() {
@@ -18,6 +18,16 @@ export default async function seed() {
 		{
 			id: 4,
 			unidades: "Unidad"
+		}
+	])
+
+	await db.insert(PRODUCTOS).values([
+		{
+			id: "001",
+			nombre: "producto 1",
+			cantidad: 2,
+			unidad: 1,
+			fechaIngreso: new Date()
 		}
 	])
 }
